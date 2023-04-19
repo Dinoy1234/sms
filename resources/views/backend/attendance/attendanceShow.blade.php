@@ -9,13 +9,11 @@
     <div class="page-header">
         <div class="row align-items-center">
             <div class="col">
-                {{-- <h3 class="page-title">Add class</h3> --}}
-               
             </div>
         </div>
     </div>
 
-    
+
 
     <div class="row">
         <div class="col-sm-12">
@@ -36,7 +34,7 @@
                                         <option value="B">B</option>
                                         <option value="C">C</option>
                                         <option value="D">D</option>
-                                        
+
                                     </select>
                                 </div>
                             </div>
@@ -48,7 +46,7 @@
                                         @foreach ( $class as $data)
                                         <option value="{{$data->id}}">{{$data->class}}</option>
                                         @endforeach
-                                       
+
                                     </select>
                                 </div>
                             </div>
@@ -60,17 +58,17 @@
                                         @foreach ( $subject as $data)
                                         <option value="{{$data->id}}">{{$data->subject_name}}</option>
                                         @endforeach
-                                       
+
                                     </select>
                                 </div>
                             </div>
                             <div class="col-6 col-sm-6 ">
                                 <div class="form-group">
                                     <h5>Date: </h5>
-                                    <input type="date" name="date">
+                                    <input type="date" name="date" class="form-control">
                                 </div>
                             </div>
-                          
+
                             <div class="col-12">
                                 <button type="submit" class="btn btn-primary">Submit</button>
                             </div>
@@ -80,7 +78,7 @@
             </div>
         </div>
     </div>
-   
+
 
     <div class="row">
         <div class="col-12">
@@ -88,8 +86,8 @@
         </div>
         <div class="col-sm-12">
             <div class="card card-table">
-               
-                  
+
+
                 <div class="card-body">
                     <div class="table-responsive">
                         <table class="table table-hover table-center mb-0 datatable">
@@ -98,7 +96,7 @@
                                     <th>ID</th>
                                     {{-- <th>Student ID</th> --}}
                                     <th>Student Name</th>
-                                    
+
                                     <th class="text-right">Attendance</th>
                                 </tr>
                             </thead>
@@ -107,7 +105,7 @@
                                 @foreach ($all as $key=>$data)
                                 <tr>
                                     <td>{{$key+1}}</td>
-                                    <td>{{$data->Student->name}}  
+                                    <td>{{$data->Student->name}}
                                     </td>
 
                                     <td>
@@ -115,13 +113,13 @@
                                     </td>
                                 </tr>
                                 @endforeach
-                              
+
                                 </div>
                             </tbody>
                         </table>
                     </div>
                 </div>
-                
+
             </div>
         </div>
     </div>

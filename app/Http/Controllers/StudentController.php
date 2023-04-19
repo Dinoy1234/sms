@@ -8,45 +8,24 @@ use Illuminate\Http\Request;
 
 class StudentController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function index()
     {
         $student=User::where('role','student')->get();
         return view('backend.student.list',compact('student'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function create()
     {
         return view('backend.student.add');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(Request $request)
     {
-        // dd($request->all());
-        
-        
-       
         $image_name = null;
         if ($request->hasfile('image')) {
             $image_name = date('Ymdhis') . '.' . $request->file('image')->getClientOriginalExtension();
             $request->file('image')->storeAs('/uploads/students', $image_name);
         }
-// dd($image_name);
        User::create([
 
            'name' => $request->name,
@@ -76,46 +55,24 @@ class StudentController extends Controller
            'permanent_address' => $request->permanent_address,
 
        ]);
-    //    dd($a);
-       
        return redirect()->route('student.index')
             ->with('success', 'Student created successfully.');
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Student  $student
-     * @return \Illuminate\Http\Response
-     */
     public function show(Student $student,$id)
     {
         $students=User::find($id);
         return view('backend.student.single_view',compact('students'));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Student  $student
-     * @return \Illuminate\Http\Response
-     */
     public function edit(Student $student,$id)
     {
         $student=User::find($id);
         return view('backend.student.edit',compact('student'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Student  $student
-     * @return \Illuminate\Http\Response
-     */
     public function update(Request $request, Student $student,$id)
     {
-       
         $image_name = null;
         if ($request->hasfile('image')) {
             $image_name = date('Ymdhis') . '.' . $request->file('image')->getClientOriginalExtension();
@@ -154,27 +111,17 @@ class StudentController extends Controller
             ->with('success', 'Student updated successfully.');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Student  $student
-     * @return \Illuminate\Http\Response
-     */
-  
     public function delete($id){
         User::find($id)->delete();
-        
         return redirect()->back();
     }
 
     public function approved($id){
-
         $student=User::find($id);
         $student->update([
             'status'=>'Approved'
         ]);
-
         return redirect()->back();
     }
-    
+
 }

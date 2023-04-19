@@ -29,7 +29,6 @@ class SetSectionController extends Controller
             'teacher_id' => $request->teacher_id,
             'class_id' => $request->class_id,
             'subject_id' => $request->subject_id,
-
         ]);
         return redirect()->back();
     }
