@@ -1,9 +1,8 @@
 <?php
 
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ExamController;
-use App\Http\Controllers\HomeController;
+use App\Http\Controllers\QuestionController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\MasterController;
@@ -55,9 +54,19 @@ Route::get('/student/attendance/show',[attendanceController::class, 'attendanceS
 Route::get('/exam/list',[ExamController::class, 'index'])->name('exam_index');
 Route::get('/exam/create',[ExamController::class, 'create'])->name('exam_create');
 Route::post('/exam/store',[ExamController::class, 'store'])->name('exam_store');
-Route::get('/exam/edit',[ExamController::class, 'edit'])->name('exam_edit');
+Route::get('/exam/show/{id}',[ExamController::class, 'show'])->name('exam_show');
+Route::get('/exam/edit/{id}',[ExamController::class, 'edit'])->name('exam_edit');
+Route::get('/exam/update/{id}',[ExamController::class, 'update'])->name('exam_update');
 Route::get('/exam/delete/{id}',[ExamController::class, 'destroy'])->name('exam_delete');
 
+// ===================== Question =================== //
+Route::get('/quesion/list',[QuestionController::class, 'index'])->name('quesion_index');
+Route::get('/quesion/create',[QuestionController::class, 'create'])->name('quesion_create');
+Route::post('/quesion/store',[QuestionController::class, 'store'])->name('quesion_store');
+Route::get('/quesion/show/{id}',[QuestionController::class, 'show'])->name('quesion_show');
+Route::get('/quesion/edit/{id}',[QuestionController::class, 'edit'])->name('quesion_edit');
+Route::get('/quesion/update/{id}',[QuestionController::class, 'update'])->name('quesion_update');
+Route::get('/quesion/delete/{id}',[QuestionController::class, 'destroy'])->name('quesion_delete');
 
 
 // =======================student======================= //

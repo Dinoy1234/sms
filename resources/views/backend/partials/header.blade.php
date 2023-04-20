@@ -1,9 +1,9 @@
 <div class="header">
     <div class="header-left">
-        <a href="index.html" class="logo" >
+        <a href="{{route('master.index')}}" class="logo" >
             <img src="{{url('backend/assets/img/pre.png')}}" style=" max-height: 123px;" alt="Logo" width="170" height="160" >
         </a>
-        <a href="index.html" class="logo logo-small">
+        <a href="{{route('master.index')}}" class="logo logo-small">
             <img src="{{url('backend/assets/img/pre.png')}}" alt="Logo" width="30" height="30">
         </a>
     </div>

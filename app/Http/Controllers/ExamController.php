@@ -32,41 +32,57 @@ class ExamController extends Controller
 
     public function store(Request $request)
     {
-        try {
-            Exam::create([
-                'exam_name' => $request->exam_name,
-                'exam_type' => $request->exam_type,
-                'class_id' => $request->class_id,
-                'subject_id' => $request->subject_id,
-                'section' => $request->section,
-                'start_time' => $request->start_time,
-                'end_time' => $request->end_time,
-                'date' =>Carbon::parse(($request->date))
-            ]);
-            return redirect()->route('exam_index');
-        }
-        catch (Exception $e) {
-            dd($e);
-        }
+        Exam::create([
+            'exam_name' => $request->exam_name,
+            'exam_type' => $request->exam_type,
+            'class_id' => $request->class_id,
+            'subject_id' => $request->subject_id,
+            'section' => $request->section,
+            'start_time' => $request->start_time,
+            'end_time' => $request->end_time,
+            'date' =>Carbon::parse(($request->date))
+        ]);
+        return redirect()->route('exam_index');
     }
 
-    public function show(Exam $exam)
+    public function show(Request $request, $id)
     {
-        //
+        $single = Exam::with('Department','Subject')->find($id);
+        return view('backend.exam.single_view', compact('single'));
     }
 
-    public function edit(Exam $exam)
+    public function edit(Request $request, $id)
     {
-        //
+        $classes=Department::all();
+        $sections=StudentClass::all();
+        $subjects=Subject::all();
+        $all = StudentClass::where('section', $request->section)
+                    ->where('subject_id', $request->subject_id)
+                    ->where('class_id', $request->class_id)
+                    ->get();
+        $single = Exam::with('Department','Subject')->find($id);
+        return view('backend.exam.edit', compact('classes', 'sections', 'subjects', 'all', 'single'));
     }
 
-    public function update(Request $request, Exam $exam)
+    public function update(Request $request, $id)
     {
-        //
+        $exam = Exam::find($id);
+        $exam->update([
+            'exam_name' => $request->exam_name,
+            'exam_type' => $request->exam_type,
+            'class_id' => $request->class_id,
+            'subject_id' => $request->subject_id,
+            'section' => $request->section,
+            'start_time' => $request->start_time,
+            'end_time' => $request->end_time,
+            'date' =>Carbon::parse(($request->date))
+        ]);
+        return redirect()->route('exam_index');
     }
 
-    public function destroy(Exam $exam)
+    public function destroy($id)
     {
-        //
+        Exam::find($id)->delete();
+        return redirect()->back();
     }
 }
