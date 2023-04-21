@@ -83,8 +83,8 @@
                         <a href="#"><i class="fas fa-book-reader"></i> <span>Question</span> <span
                                 class="menu-arrow"></span></a>
                         <ul>
-                            <li><a href="#">Question List</a></li>
-                            <li><a href="#">Question Add</a></li>
+                            <li><a href="{{route('quesion_index')}}">Question List</a></li>
+                            <li><a href="{{route('quesion_create')}}">Question Add</a></li>
                         </ul>
                     </li>
                 </ul>

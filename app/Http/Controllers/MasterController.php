@@ -10,4 +10,8 @@ class MasterController extends Controller
     {
         return view('backend.admin.dashboard_content');
     }
+    public function profile($id)
+    {
+        return view('backend.profile.profile');
+    }
 }

@@ -28,6 +28,7 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'admin']], function 
         return view('Backend.master');
     })->name('home');
 Route::get('/',[MasterController::class,'index'])->name('master.index');
+Route::get('/profile/{id}',[MasterController::class,'profile'])->name('master.profile');
 
 // Logout
 Route::get('/logout', [AdminController::class, 'logout'])->name('admin.logout');
