@@ -29,22 +29,27 @@
                             <div class="col-12 col-sm-12">
                                 <div class="form-group">
                                     <label>Exam Name</label>
-                                    <input name="exam_name" type="text" class="form-control">
-                                </div>
-                            </div>
-                            <div class="col-12 col-sm-12">
-                                <div class="form-group">
-                                    <label>Question Name</label>
-                                    <input name="exam_name" type="text" class="form-control">
+                                    <select name="exam_id" class="form-control">
+                                        <option>Select Exam</option>
+                                        @foreach ($exams as $exam)
+                                        <option value="{{ $exam->id }}">{{ $exam->exam_name }}</option>
+                                        @endforeach
+                                    </select>
                                 </div>
                             </div>
                             <div class="col-12 col-sm-12">
                                 <div class="form-group">
                                     <label>Question</label>
-                                    <input name="exam_name" type="text" class="form-control">
+                                    <input name="question" type="text" class="form-control">
                                 </div>
                             </div>
-                            <div class="col-12 col-sm-12 d-flex">
+                            <div class="col-12 col-sm-12">
+                                <div class="form-group">
+                                    <label>Answer</label>
+                                    <input name="answer" type="text" class="form-control">
+                                </div>
+                            </div>
+                            {{-- <div class="col-12 col-sm-12 d-flex">
                                 <div class="form-group col-12 col-sm-6">
                                     <label>Option 1</label>
                                     <input name="exam_name" type="text" class="form-control">
@@ -63,11 +68,13 @@
                                     <label>Option 4</label>
                                     <input name="exam_name" type="text" class="form-control">
                                 </div>
-                            </div>
-                            <div class="col-12 col-sm-12">
+                            </div> --}}
+                            <div class="col-12 col-sm-12 field_wrapper">
                                 <div class="form-group">
-                                    <label>Answer</label>
-                                    <input name="exam_name" type="text" class="form-control">
+                                    <label for="" class="mt-3">Options</label><br>
+                                    <input class="form-control col-12 col-sm-12" type="text" name="option[]">
+                                    <a href="javascript:void(0);" class="add_button"
+                                        style="color: white; background-color:#18aefa; padding:5px 10px;" title="Add field">+</a>
                                 </div>
                             </div>
                             <div class="col-12 col-sm-12">
@@ -80,5 +87,30 @@
         </div>
     </div>
 </div>
+
+
+{{--------------- script  --------------------}}
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script type="text/javascript">
+    $( document ).ready( function () {
+        var maxField = 10;
+        var addButton = $( '.add_button' );
+        var wrapper = $( '.field_wrapper' );
+        var fieldHTML =
+            '<div style="margin-bottom: 5px"><input class="form-control" type="text" name="option[]"><a href="javascript:void(0);" class="remove_button" style="color: white; background-color:#18aefa; padding:5px 10px;">-</a></div>';
+        var x = 1;
+        $( addButton ).click( function () {
+            if ( x < maxField ) {
+                x++;
+                $( wrapper ).append( fieldHTML );
+            }
+        } );
+        $( wrapper ).on( 'click', '.remove_button', function ( e ) {
+            e.preventDefault();
+            $( this ).parent( 'div' ).remove();
+            x--;
+        } );
+    } );
+</script>
 
 @endsection
