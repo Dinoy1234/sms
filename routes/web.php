@@ -65,8 +65,6 @@ Route::get('/quesion/list',[QuestionController::class, 'index'])->name('quesion_
 Route::get('/quesion/create',[QuestionController::class, 'create'])->name('quesion_create');
 Route::post('/quesion/store',[QuestionController::class, 'store'])->name('quesion_store');
 Route::get('/quesion/show/{id}',[QuestionController::class, 'show'])->name('quesion_show');
-Route::get('/quesion/edit/{id}',[QuestionController::class, 'edit'])->name('quesion_edit');
-Route::get('/quesion/update/{id}',[QuestionController::class, 'update'])->name('quesion_update');
 Route::get('/quesion/delete/{id}',[QuestionController::class, 'destroy'])->name('quesion_delete');
 
 

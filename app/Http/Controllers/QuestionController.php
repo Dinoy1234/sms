@@ -5,12 +5,14 @@ namespace App\Http\Controllers;
 use App\Models\Exam;
 use App\Models\Question;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class QuestionController extends Controller
 {
     public function index()
     {
-        return view('backend.question.list');
+        $questions = Question::with('exam')->get();
+        return view('backend.question.list', compact('questions'));
     }
 
     public function create()
@@ -21,30 +23,23 @@ class QuestionController extends Controller
 
     public function store(Request $request)
     {
+        $data = $request->option;
+        $values = implode(',', $data);
         $questions = Question::create([
             'question' => $request->question,
-            'exam_id' => $request->exam_id,
+            'exam_Id' => $request->exam_id,
             'answer' => $request->answer,
-            // foreach ($request->option as $opt) {
-            //         'option' => $opt
-            // }
+            'option' => $values
         ]);
+        // dd($questions);
         return redirect()->back();
     }
 
-    public function show(Question $question)
+    public function show(Request $request, $id)
     {
-        //
-    }
-
-    public function edit(Question $question)
-    {
-        //
-    }
-
-    public function update(Request $request, Question $question)
-    {
-        //
+        $single = Question::with('exam')->where('exam_id', $id)->get();
+        $options = DB::table('questions')->pluck('option')->toArray();
+        return view('backend.question.single_view', compact('single', 'options'));
     }
 
     public function destroy(Question $question)

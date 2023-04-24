@@ -19,47 +19,20 @@
             <div class="row">
                 <div class="col-md-12">
                     <div class="about-info">
-                        <h4>About {{$single->exam_name}}</h4>
+                        {{-- <h4>About {{$single->exam_name}}</h4> --}}
                         <div class="media mt-3">
                             <div class="media-body">
-                                <ul>
-                                    <li>
-                                        <span class="title-span">Exam Name : </span>
-                                        <span class="info-span">{{$single->exam_name}}</span>
-                                    </li>
-                                    <li>
-                                        <span class="title-span">Exam Type : </span>
-                                        @if ($single->exam_type == 1)
-                                        <span class="info-span">Offline Exam</span>
-                                        @else
-                                        <span class="info-span">Online Exam</span>
-                                        @endif
-                                    </li>
-                                    <li>
-                                        <span class="title-span">Class : </span>
-                                        <span class="info-span">{{$single->Department->class}}</span>
-                                    </li>
-                                    <li>
-                                        <span class="title-span">Subject : </span>
-                                        <span class="info-span">{{$single->Subject->subject_name}}</span>
-                                    </li>
-                                    <li>
-                                        <span class="title-span">Section : </span>
-                                        <span class="info-span">{{$single->section}}</span>
-                                    </li>
-                                    <li>
-                                        <span class="title-span">Start Time : </span>
-                                        <span class="info-span">{{ Carbon\Carbon::parse($single->start_time)->format('h:i') }}</span>
-                                    </li>
-                                    <li>
-                                        <span class="title-span">End Time : </span>
-                                        <span class="info-span">{{ Carbon\Carbon::parse($single->end_time)->format('h:i') }}</span>
-                                    </li>
-                                    <li>
-                                        <span class="title-span">Date : </span>
-                                        <span class="info-span">{{ Carbon\Carbon::parse($single->end_time)->format('d-m-Y') }}</span>
-                                    </li>
-                                </ul>
+                                    @foreach ($single as $key=>$data)
+                                        <label for="" class="title-span"><strong>Question-</strong>{{$key+1}}</label>
+                                        <p>{{ $data->question }}</p>
+                                        <label for="" class="info-span"><strong>Option</strong></label>
+                                        <ul>
+                                            @foreach (explode(',', $data->option) as $key=>$option)
+                                            <li>{{$key+1}}){{trim($option)}}</li>
+                                            @endforeach
+                                        </ul>
+                                        <label for="" class="title-span"><strong>Answer:</strong> {{ $data->answer }}</label><br><br>
+                                    @endforeach
                             </div>
                         </div>
                     </div>

@@ -20,7 +20,7 @@
         <div class="col-sm-12">
             <div class="card">
                 <div class="card-body">
-                    <form method="POST" action="#" enctype="multipart/form-data">
+                    <form method="POST" action="{{ route("quesion_store") }}" enctype="multipart/form-data">
                         @csrf
                         <div class="row">
                             <div class="col-12">

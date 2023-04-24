@@ -30,26 +30,21 @@
                             <thead>
                                 <tr>
                                     <th>Exam Name</th>
-                                    <th>Question Name</th>
                                     <th class="text-right">Action</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                {{-- @foreach ($exams as $exam) --}}
+                                @foreach ($questions as $question)
                                 <tr>
                                     <td>
                                         <h2>
-                                            <a>Exam Name</a>
+                                            <a>{{ $question->exam->exam_name }}</a>
                                         </h2>
                                     </td>
-                                    <td>Question Name</td>
                                     <td class="text-right">
                                         <div class="actions">
-                                            <a href="#" class="btn btn-sm text-white bg-success-light mr-2">
+                                            <a href="{{ route('quesion_show', $question->id ) }}" class="btn btn-sm text-white bg-success-light mr-2">
                                                 <i class="fas fa-eye"></i>
-                                            </a>
-                                            <a href="#" class="btn btn-sm text-white bg-warning mr-2">
-                                                <i class="fas fa-pen"></i>
                                             </a>
                                             <a href="#" class="btn btn-sm text-white bg-danger">
                                                 <i class="fas fa-trash"></i>
@@ -57,7 +52,7 @@
                                         </div>
                                     </td>
                                 </tr>
-                                {{-- @endforeach --}}
+                                @endforeach
                             </tbody>
                         </table>
                     </div>
