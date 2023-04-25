@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\Models\Exam;
 use App\Models\Question;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
 
 class QuestionController extends Controller
 {
@@ -25,25 +24,24 @@ class QuestionController extends Controller
     {
         $data = $request->option;
         $values = implode(',', $data);
-        $questions = Question::create([
+        Question::create([
             'question' => $request->question,
             'exam_Id' => $request->exam_id,
             'answer' => $request->answer,
             'option' => $values
         ]);
-        // dd($questions);
         return redirect()->back();
     }
 
     public function show(Request $request, $id)
     {
         $single = Question::with('exam')->where('exam_id', $id)->get();
-        $options = DB::table('questions')->pluck('option')->toArray();
-        return view('backend.question.single_view', compact('single', 'options'));
+        return view('backend.question.single_view', compact('single'));
     }
 
-    public function destroy(Question $question)
+    public function destroy($id)
     {
-        //
+        $single = Question::find($id)->delete();
+        return redirect()->back();
     }
 }

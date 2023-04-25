@@ -8,7 +8,7 @@
         <div class="row align-items-center">
             <div class="col">
                 {{-- <h3 class="page-title">Add class</h3> --}}
-               
+
             </div>
         </div>
     </div>
@@ -31,7 +31,7 @@
                                         @foreach ( $class as $data)
                                         <option value="{{$data->id}}">{{$data->class}}</option>
                                         @endforeach
-                                       
+
                                     </select>
                                 </div>
                             </div>
@@ -44,7 +44,7 @@
                                         <option value="B">B</option>
                                         <option value="C">C</option>
                                         <option value="D">D</option>
-                                        
+
                                     </select>
                                 </div>
                             </div>
@@ -56,11 +56,11 @@
                                         @foreach ( $subject as $data)
                                         <option value="{{$data->id}}">{{$data->subject_name}}</option>
                                         @endforeach
-                                       
+
                                     </select>
                                 </div>
                             </div>
-                          
+
                             <div class="col-12">
                                 <button type="submit" class="btn btn-primary">Submit</button>
                             </div>
@@ -92,20 +92,19 @@
                                 @foreach ($all as $key=>$data)
                                 <tr>
                                     <td>{{$key+1}}</td>
-                                    
+
                                     <td>{{$data->Student->name}}</td>
                                     <td>{{$data->Department->class}}</td>
                                     <td>{{$data->Subject->subject_name}}</td>
                                     <td>{{$data->teacher->name}}</td>
-                                    <td>
-                                        <a class="btn btn-danger" href="{{route('student.class.delete',$data->id)}}">Delete</a>
+                                    <td class="text-right">
+                                        <a class="btn btn-danger" href="{{route('student.class.delete',$data->id)}}"><i class="fas fa-trash"></i></a>
                                         </td>
-                                        
                                     </td>
                                 </tr>
                                 @endforeach
-                              
-                               
+
+
                             </tbody>
                         </table>
                     </div>

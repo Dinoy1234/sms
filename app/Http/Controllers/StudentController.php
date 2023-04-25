@@ -14,10 +14,10 @@ class StudentController extends Controller
         return view('backend.student.list',compact('student'));
     }
 
-    public function create()
-    {
-        return view('backend.student.add');
-    }
+        public function create()
+        {
+            return view('backend.student.add');
+        }
 
     public function store(Request $request)
     {

@@ -15,7 +15,6 @@
                 </ul>
             </div>
             <div class="col-auto text-right float-right ml-auto">
-                <a href="#" class="btn btn-outline-primary mr-2"><i class="fas fa-download"></i> Download</a>
                 <a href="{{route('quesion_create')}}" class="btn btn-primary"><i class="fas fa-plus"></i></a>
             </div>
         </div>
@@ -46,7 +45,7 @@
                                             <a href="{{ route('quesion_show', $question->id ) }}" class="btn btn-sm text-white bg-success-light mr-2">
                                                 <i class="fas fa-eye"></i>
                                             </a>
-                                            <a href="#" class="btn btn-sm text-white bg-danger">
+                                            <a href="{{ route('quesion_delete', $question->id ) }}" class="btn btn-sm text-white bg-danger">
                                                 <i class="fas fa-trash"></i>
                                             </a>
                                         </div>

@@ -90,7 +90,7 @@
                             </div>
                             <div class="col-12 col-sm-6">
                                 <div class="form-group">
-                                    <label>Event Date</label>
+                                    <label>Exam Date</label>
                                     <input name="date" type="date" class="form-control">
                                 </div>
                             </div>

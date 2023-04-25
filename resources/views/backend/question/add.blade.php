@@ -49,26 +49,6 @@
                                     <input name="answer" type="text" class="form-control">
                                 </div>
                             </div>
-                            {{-- <div class="col-12 col-sm-12 d-flex">
-                                <div class="form-group col-12 col-sm-6">
-                                    <label>Option 1</label>
-                                    <input name="exam_name" type="text" class="form-control">
-                                </div>
-                                <div class="form-group col-12 col-sm-6">
-                                    <label>Option 2</label>
-                                    <input name="exam_name" type="text" class="form-control">
-                                </div>
-                            </div>
-                            <div class="col-12 col-sm-12 d-flex">
-                                <div class="form-group col-12 col-sm-6">
-                                    <label>Option 3</label>
-                                    <input name="exam_name" type="text" class="form-control">
-                                </div>
-                                <div class="form-group col-12 col-sm-6">
-                                    <label>Option 4</label>
-                                    <input name="exam_name" type="text" class="form-control">
-                                </div>
-                            </div> --}}
                             <div class="col-12 col-sm-12 field_wrapper">
                                 <div class="form-group">
                                     <label for="" class="mt-3">Options</label><br>

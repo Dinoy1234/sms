@@ -19,7 +19,7 @@
             <div class="card">
                 <div class="card-body">
                     <form action="{{route('student.update',$student->id)}}" method="POST" enctype="multipart/form-data">
-                        
+
                         @csrf
                         <div class="row">
                             <div class="col-12">
@@ -31,7 +31,7 @@
                                     <input value="{{$student->name}}" type="text" name="name" class="form-control">
                                 </div>
                             </div>
-                            
+
                             <div class="col-12 col-sm-6">
                                 <div class="form-group">
                                     <label>Student Id</label>
@@ -96,12 +96,6 @@
                                     <input type="phone" value="{{$student->phone}}" name="phone" class="form-control">
                                 </div>
                             </div>
-                            {{-- <div class="col-12 col-sm-6">
-                                <div class="form-group">
-                                    <label>Admission Number</label>
-                                    <input type="text" class="form-control">
-                                </div>
-                            </div> --}}
                             <div class="col-12 col-sm-6">
                                 <div class="form-group">
                                     <label>Section</label>

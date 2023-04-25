@@ -36,21 +36,21 @@ class attendanceController extends Controller
                 'date' =>Carbon::parse(Carbon::now()->format('Y-m-d'))
             ]);
             DB::table('attendances')->insert($saveRecord);
-          }
-          return redirect()->back();
         }
+        return redirect()->back();
+    }
 
 
-        public function attendanceShow(Request $request){
-            $class=Department::all();
-            $section=StudentClass::all();
-            $subject=Subject::all();
-            $date=Carbon::parse(($request->date));
-            $all = Attendance::where('section', $request->section)
-            ->where('subject_id', $request->subject_id)
-            ->where('class_id', $request->class_id)
-            ->where('date',$date)
-            ->get();
-            return view('backend.attendance.attendanceShow',compact('all','class','section','subject'));
-        }
+    public function attendanceShow(Request $request){
+        $class=Department::all();
+        $section=StudentClass::all();
+        $subject=Subject::all();
+        $date=Carbon::parse(($request->date));
+        $all = Attendance::where('section', $request->section)
+        ->where('subject_id', $request->subject_id)
+        ->where('class_id', $request->class_id)
+        ->where('date',$date)
+        ->get();
+        return view('backend.attendance.attendanceShow',compact('all','class','section','subject'));
+    }
 }

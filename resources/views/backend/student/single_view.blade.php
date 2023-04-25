@@ -21,7 +21,6 @@
                     <div class="about-info">
                         <h4>About ({{$students->name}})</h4>
                         <div class="media mt-3">
-                            {{-- @dd($students->image) --}}
                             <img src="{{ url('uploads/uploads/students/' . $students->image) }}" class="mr-3" alt="...">
                             <div class="media-body">
                                 <ul>
@@ -52,13 +51,13 @@
                                 </ul>
                             </div>
                         </div>
-                        
-                        
+
+
                     </div>
                 </div>
             </div>
-           
-           
+
+
         </div>
     </div>
 </div>
