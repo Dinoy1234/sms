@@ -16,7 +16,7 @@ class CheckAdmin
      */
     public function handle(Request $request, Closure $next)
     {
-        if (auth()->user()->role == 'admin' || (auth()->user()->role=='student' && auth()->user()->status='Approved')) {
+        if (auth()->user()->role == 'admin' || (auth()->user()->role=='student' && auth()->user()->status='Approved') || (auth()->user()->role=='teacher')) {
 
             return $next($request);
         } else {

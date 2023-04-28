@@ -12,6 +12,7 @@
       <link rel="stylesheet" href="{{url('/backend/assets/plugins/fontawesome/css/fontawesome.min.css')}}">
       <link rel="stylesheet" href="{{url('/backend/assets/plugins/fontawesome/css/all.min.css')}}">
       <link rel="stylesheet" href="{{url('/backend/assets/css/style.css')}}">
+      <link rel="stylesheet" href="http://cdn.bootcss.com/toastr.js/latest/css/toastr.min.css">
    </head>
    <body>
       <div class="main-wrapper login-body">
@@ -57,6 +58,9 @@
       <script src="{{url('backend/assets/js/popper.min.js')}}"></script>
       <script src="{{url('backend/assets/plugins/bootstrap/js/bootstrap.min.js')}}"></script>
       <script src="{{url('backend/assets/js/script.js')}}"></script>
+      <script src="http://cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
+      <script src="http://cdn.bootcss.com/toastr.js/latest/js/toastr.min.js"></script>
+      {!! Toastr::message() !!}
    </body>
    <!-- Mirrored from preschool.dreamguystech.com/html-template/login.html by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 28 Oct 2021 11:11:40 GMT -->
 </html>

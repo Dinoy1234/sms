@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Department;
 use Illuminate\Http\Request;
+use Brian2694\Toastr\Facades\Toastr;
 
 class DepartmentController extends Controller
 {
@@ -20,9 +21,15 @@ class DepartmentController extends Controller
 
     public function store(Request $request)
     {
+        $request->validate([
+
+            'class' => 'required',
+        ]);
+        
         Department::create([
             'class' => $request->class,
         ]);
+        Toastr::success(' created successfully.', 'Class' );
         return redirect()->route('department.index');
     }
 
@@ -34,7 +41,7 @@ class DepartmentController extends Controller
     public function destroy(Department $department,$id)
     {
         Department::find($id)->delete();
-
+        Toastr::warning(' Deleted.', 'Class' );
         return redirect()->back();
     }
 }

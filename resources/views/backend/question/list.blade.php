@@ -29,6 +29,7 @@
                             <thead>
                                 <tr>
                                     <th>Exam Name</th>
+                                    <th>Class</th>
                                     <th class="text-right">Action</th>
                                 </tr>
                             </thead>
@@ -37,11 +38,17 @@
                                 <tr>
                                     <td>
                                         <h2>
-                                            <a>{{ $question->exam->exam_name }}</a>
+                                            <a>{{ $question->exam_name }}</a>
+                                        </h2>
+                                    </td>
+                                    <td>
+                                        <h2>
+                                            <a>{{ $question->Department->class }}</a>
                                         </h2>
                                     </td>
                                     <td class="text-right">
                                         <div class="actions">
+                                            {{-- @dd($question->id) --}}
                                             <a href="{{ route('quesion_show', $question->id ) }}" class="btn btn-sm text-white bg-success-light mr-2">
                                                 <i class="fas fa-eye"></i>
                                             </a>

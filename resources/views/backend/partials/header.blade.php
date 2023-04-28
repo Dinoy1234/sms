@@ -1,3 +1,8 @@
+<style>
+    img.avatar-img.rounded-circle {
+    width: 43px;
+}
+</style>
 <div class="header">
     <div class="header-left">
         <a href="{{route('master.index')}}" class="logo" >
@@ -16,17 +21,35 @@
     <ul class="nav user-menu">
         <li class="nav-item dropdown has-arrow">
             <a href="#" class="dropdown-toggle nav-link" data-toggle="dropdown">
-                <span class="user-img"><img class="rounded-circle" src="{{ isset(Auth()->user()->image) ? url('uploads/uploads/students/' . Auth()->user()->image) : url('backend/assets/img/profiles/avatar-13.jpg') }}" width="31"
-                        alt="{{auth()->user()->name}}"></span>
+                <span class="user-img avatar-sm">
+                    @if (Auth()->user()->role=="student")
+                    <img src="{{url('uploads/uploads/students/' . Auth()->user()->image) }}" alt="" class="avatar-img rounded-circle">
+             @elseif (Auth()->user()->role=="teacher")
+                    <img src="{{url('uploads/uploads/teachers/' . Auth()->user()->image) }}" alt="" class="avatar-img rounded-circle">
+                    @else
+                    <img src="{{url('backend/assets/img/profiles/avatar-13.jpg') }}" alt="" class="avatar-img rounded-circle">
+            @endif    
+                </span>
             </a>
             <div class="dropdown-menu">
                 <div class="user-header">
                     <div class="avatar avatar-sm">
-                        <img src="{{ isset(Auth()->user()->image) ? url('uploads/uploads/students/' . Auth()->user()->image) : url('backend/assets/img/profiles/avatar-13.jpg') }}" alt="User Image" class="avatar-img rounded-circle">
+                        @if (Auth()->user()->role=="student")
+                        <img src="{{url('uploads/uploads/students/' . Auth()->user()->image) }}" alt="" class="avatar-img rounded-circle">
+                 @elseif (Auth()->user()->role=="teacher")
+                        <img src="{{url('uploads/uploads/teachers/' . Auth()->user()->image) }}" alt="" class="avatar-img rounded-circle">
+                        @else
+                        <img src="{{url('backend/assets/img/profiles/avatar-13.jpg') }}" alt="" class="avatar-img rounded-circle">
+                @endif
                     </div>
+                    
                     <div class="user-text">
                         <h6>{{auth()->user()->name}}</h6>
-                        <p class="text-muted mb-0">Administrator</p>
+                        <p class="text-muted mb-0">@if (auth()->user()->role=="admin")
+                            Administrator
+                        @else
+                          {{auth()->user()->role}} 
+                        @endif </p>
                     </div>
                 </div>
                 <a class="dropdown-item" href="{{route('master.profile', Auth()->user()->id )}}">My Profile</a>

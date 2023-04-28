@@ -6,13 +6,19 @@
     <div class="page-header">
         <div class="row">
             <div class="col-sm-12">
-                <h3 class="page-title">Welcome Admin!</h3>
+                
+                <h3 class="page-title">Welcome ({{auth()->user()->name}})</h3>
+               
+                
                 <ul class="breadcrumb">
                     <li class="breadcrumb-item active">Dashboard</li>
                 </ul>
             </div>
         </div>
     </div>
+    @if (auth()->user()->role=="admin" || auth()->user()->role=="teacher")
+        
+   
     <div class="row">
         <div class="col-xl-3 col-sm-6 col-12 d-flex">
             <div class="card bg-one w-100">
@@ -22,7 +28,7 @@
                             <i class="fas fa-user-graduate"></i>
                         </div>
                         <div class="db-info">
-                            <h3>500</h3>
+                            <h3>{{$student}}</h3>
                             <h6>Students</h6>
                         </div>
                     </div>
@@ -37,7 +43,7 @@
                             <i class="fas fa-crown"></i>
                         </div>
                         <div class="db-info">
-                            <h3>50</h3>
+                            <h3>{{$teacher}}</h3>
                             <h6>Teachers</h6>
                         </div>
                     </div>
@@ -52,7 +58,7 @@
                             <i class="fas fa-building"></i>
                         </div>
                         <div class="db-info">
-                            <h3>10</h3>
+                            <h3>{{$class}}</h3>
                             <h6>Classes</h6>
                         </div>
                     </div>
@@ -67,7 +73,7 @@
                             <i class="fas fa-file-invoice-dollar"></i>
                         </div>
                         <div class="db-info">
-                            <h3>5</h3>
+                            <h3>{{$exam}}</h3>
                             <h6>Exam</h6>
                         </div>
                     </div>
@@ -75,6 +81,7 @@
             </div>
         </div>
     </div>
+    @endif
 </div>
 
 @endsection

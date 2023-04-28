@@ -16,6 +16,7 @@ return new class extends Migration
         Schema::create('exams', function (Blueprint $table) {
             $table->id();
             $table->string('exam_name');
+            $table->foreignId('teacher_id');
             $table->integer('exam_type');
             $table->integer('class_id');
             $table->integer('subject_id');

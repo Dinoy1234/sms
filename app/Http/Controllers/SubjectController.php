@@ -2,10 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Department;
 use App\Models\Subject;
-use Illuminate\Http\Request;
+use App\Models\Department;
 use Mockery\Matcher\Subset;
+use Illuminate\Http\Request;
+use Brian2694\Toastr\Facades\Toastr;
 
 class SubjectController extends Controller
 {
@@ -24,12 +25,18 @@ class SubjectController extends Controller
 
     public function store(Request $request)
     {
+        $request->validate([
+
+            'subject_name' => 'required',
+            
+
+        ]);
         Subject::create([
             'subject_name' => $request->subject_name,
             'class_id' => $request->class_id,
             'subject_code' => $request->subject_code,
         ]);
-
+        Toastr::success('create successfully', 'Subject');
         return redirect()->route('subject.index');
     }
 

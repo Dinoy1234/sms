@@ -2,9 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Exam;
+use App\Models\examAttend;
 use App\Models\User;
 use App\Models\Student;
+use App\Models\StudentClass;
 use Illuminate\Http\Request;
+use Brian2694\Toastr\Facades\Toastr;
 
 class StudentController extends Controller
 {
@@ -26,12 +30,23 @@ class StudentController extends Controller
             $image_name = date('Ymdhis') . '.' . $request->file('image')->getClientOriginalExtension();
             $request->file('image')->storeAs('/uploads/students', $image_name);
         }
+        $request->validate([
+
+            'name' => 'required',
+            'email' => 'required|unique:users',
+            'password' => 'required',
+            'phone' => 'required|regex:/^([0-9\s\-\+\(\)]*)$/|min:11|max:15',
+            'present_address' => 'required',
+            'permanent_address' => 'required',
+            'gender' => 'required',
+            
+        ]);
        User::create([
 
            'name' => $request->name,
            'email' => $request->email,
            'student_id' => $request->student_id,
-           'password' => $request->password,
+           'password' => bcrypt($request->password),
            'gender' => $request->gender,
            'birth_date' => $request->birth_date,
            'class' => $request->class,
@@ -55,8 +70,8 @@ class StudentController extends Controller
            'permanent_address' => $request->permanent_address,
 
        ]);
-       return redirect()->route('student.index')
-            ->with('success', 'Student created successfully.');
+       Toastr::success(' created successfully.', 'Student' );
+       return redirect()->route('student.index');
     }
 
     public function show(Student $student,$id)
@@ -78,6 +93,15 @@ class StudentController extends Controller
             $image_name = date('Ymdhis') . '.' . $request->file('image')->getClientOriginalExtension();
             $request->file('image')->storeAs('/uploads/students', $image_name);
         }
+        $request->validate([
+
+            'name' => 'required',
+            'phone' => 'required|regex:/^([0-9\s\-\+\(\)]*)$/|min:11|max:15',
+            'present_address' => 'required',
+            'permanent_address' => 'required',
+            'gender' => 'required',
+
+        ]);
         $data=User::find($id);
         $data->update([
             'name' => $request->name,
@@ -107,12 +131,13 @@ class StudentController extends Controller
            'permanent_address' => $request->permanent_address,
 
         ]);
-        return redirect()->route('student.index')
-            ->with('success', 'Student updated successfully.');
+        Toastr::success('information Update successfully', 'Student' );
+        return redirect()->route('student.index');
     }
 
     public function delete($id){
         User::find($id)->delete();
+        Toastr::warning('Account Deleted', 'Student' );
         return redirect()->back();
     }
 
@@ -121,7 +146,20 @@ class StudentController extends Controller
         $student->update([
             'status'=>'Approved'
         ]);
+        Toastr::success('Approved successfully', 'Student' );
         return redirect()->back();
     }
+
+    public function myExamList(Request $request ){
+        // dd($request->all());
+        $subject=StudentClass::where('student_id',Auth()->user()->id)->get();
+        // dd($subject);
+        $exams=Exam::where('subject_id',$request->subject_id)->get();
+        $attend=examAttend::where('student_id',auth()->user()->id)->first();
+        // dd($attend);
+            return view('backend.student.myExamList',compact('subject','exams','attend'));
+        
+    }
+
 
 }

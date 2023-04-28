@@ -13,4 +13,8 @@ class Question extends Model
     {
         return $this->belongsTo(Exam::class,'exam_id','id');
     }
+    public function Teacher()
+    {
+        return $this->belongsTo(user::class,'teacher_id','id');
+    }
 }

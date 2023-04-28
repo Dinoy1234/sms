@@ -11,6 +11,7 @@ use App\Http\Controllers\SubjectController;
 use App\Http\Controllers\TeacherController;
 use App\Http\Controllers\attendanceController;
 use App\Http\Controllers\DepartmentController;
+use App\Http\Controllers\examAttendController;
 use App\Http\Controllers\SetSectionController;
 
 
@@ -28,7 +29,12 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'admin']], function 
         return view('Backend.master');
     })->name('home');
 Route::get('/',[MasterController::class,'index'])->name('master.index');
-Route::get('/profile/{id}',[MasterController::class,'profile'])->name('master.profile');
+Route::get('/profile',[MasterController::class,'profile'])->name('master.profile');
+Route::get('/profile/edit',[MasterController::class,'profileEdit'])->name('master.profile.edit');
+Route::post('/profile/edit/store/{id}',[MasterController::class,'profileEditStore'])->name('master.profile.edit.store');
+Route::get('/teacher/edit/store',[MasterController::class,'teacherEdit'])->name('teacher.profile.edit');
+Route::post('/profile/teacher/store/{id}',[MasterController::class,'teacherEditStore'])->name('teacher.profile.edit.store');
+
 
 // Logout
 Route::get('/logout', [AdminController::class, 'logout'])->name('admin.logout');
@@ -77,6 +83,9 @@ Route::get('/student/edit/{id}',[StudentController::class, 'edit'])->name('stude
 Route::post('/student/update{id}',[StudentController::class, 'update'])->name('student.update');
 Route::get('/student/delete/{id}',[StudentController::class, 'delete'])->name('student.delete');
 Route::get('/student/approved/{id}',[StudentController::class, 'approved'])->name('student.approved');
+
+Route::get('/student/exam/list',[StudentController::class, 'myExamList'])->name('student.exam.list');
+
 // =======================subject======================= //store
 Route::get('/subject/list',[SubjectController::class, 'index'])->name('subject.index');
 Route::get('/subject/create',[SubjectController::class, 'create'])->name('subject.create');
@@ -91,5 +100,15 @@ Route::get('/teacher/show/{id}',[TeacherController::class, 'show'])->name('teach
 Route::get('/teacher/edit/{id}',[TeacherController::class, 'edit'])->name('teacher.edit');
 Route::post('/teacher/update/{id}',[TeacherController::class, 'update'])->name('teacher.update');
 Route::get('/teacher/delete/{id}',[TeacherController::class, 'destroy'])->name('teacher.delete');
+Route::get('/teacher/exam/list',[TeacherController::class, 'TeacherExamList'])->name('teacher.exam.list');
+
+
+
+
+// attend exam 
+Route::get('/student/exam/attend/{id}',[examAttendController::class, 'attendExam'])->name('student.exam.attend');
+Route::post('/student/exam/attend/store',[examAttendController::class, 'attendExamStore'])->name('student.exam.attend.store');
+
+
 
 });

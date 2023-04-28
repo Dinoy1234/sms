@@ -21,6 +21,24 @@
 </head>
 
 <body>
+    @if (session()->has('success'))
+    <p class="alert alert-success">
+        {{ session()->get('success') }}
+    </p>
+@endif
+
+@if ($errors->any())
+    <div class="alert alert-danger">
+        <ul>
+            @foreach ($errors->all() as $error)
+                <li>
+                    {{ $error }}
+                </li>
+            @endforeach
+        </ul>
+    </div>
+@endif
+
 
     <div class="main-wrapper login-body">
         <div class="login-wrapper">
@@ -44,6 +62,17 @@
                                 </div>
                                 <div class="form-group">
                                     <input class="form-control" name="password" type="password" placeholder="Password">
+                                </div>
+                                <div class="col-12 col-sm-12">
+                                    <div class="form-group">
+                                       
+                                        <select name="class" class="form-control">
+                                            <option>Select Class</option>
+                                            @foreach ($classes as $class)
+                                            <option value="{{$class->class}}">{{$class->class}}</option>
+                                            @endforeach
+                                        </select>
+                                    </div>
                                 </div>
                                 <div class="form-group">
                                     <input class="form-control" name="image" type="file" placeholder="image">

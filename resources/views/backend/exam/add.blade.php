@@ -1,6 +1,24 @@
 @extends('backend.master')
 
 @section('master_content')
+@if (session()->has('success'))
+<p class="alert alert-success">
+    {{ session()->get('success') }}
+</p>
+@endif
+
+@if ($errors->any())
+<div class="alert alert-danger">
+    <ul>
+        @foreach ($errors->all() as $error)
+            <li>
+                {{ $error }}
+            </li>
+        @endforeach
+    </ul>
+</div>
+@endif
+
 
 <div class="content container-fluid">
 
@@ -59,7 +77,7 @@
                                     <select name="subject_id" class="form-control">
                                         <option>Select Subject</option>
                                         @foreach ($subjects as $subject)
-                                        <option value="{{$subject->id}}">{{$subject->subject_name}}</option>
+                                        <option value="{{$subject->id}}">{{$subject->subject_name}} ({{$subject->department->class}})</option>
                                         @endforeach
                                     </select>
                                 </div>

@@ -2,6 +2,23 @@
 
 @section('master_content')
 
+@if (session()->has('success'))
+<p class="alert alert-success">
+    {{ session()->get('success') }}
+</p>
+@endif
+
+@if ($errors->any())
+<div class="alert alert-danger">
+    <ul>
+        @foreach ($errors->all() as $error)
+            <li>
+                {{ $error }}
+            </li>
+        @endforeach
+    </ul>
+</div>
+@endif
 <div class="content container-fluid">
 
     <div class="page-header">
@@ -27,9 +44,9 @@
                                 <div class="form-group">
                                     <label>studdent name</label>
                                     <select name="student_id" class="form-control">
-                                        <option >Select student</option>
+                                        <option value=''>Select student</option>
                                         @foreach ($students as $student)
-                                        <option value="{{$student->id}}">{{$student->name}}</option>
+                                        <option value="{{$student->id}}">{{$student->name}} ({{$student->class}})</option>
                                         @endforeach
                                     </select>
                                 </div>
@@ -38,7 +55,7 @@
                                 <div class="form-group">
                                     <label>Section </label>
                                     <select name="section" class="form-control">
-                                        <option >Select class</option>
+                                        <option value=''>Select class</option>
                                         <option value="A">A</option>
                                         <option value="B">B</option>
                                         <option value="C">C</option>
@@ -51,7 +68,7 @@
                                 <div class="form-group">
                                     <label>class name</label>
                                     <select name="class_id" class="form-control">
-                                        <option >Select class</option>
+                                        <option  value=''>Select class</option>
                                         @foreach ($classes as $class)
                                         <option value="{{$class->id}}">{{$class->class}}</option>
                                         @endforeach
@@ -62,9 +79,9 @@
                                 <div class="form-group">
                                     <label>subject name</label>
                                     <select name="subject_id" class="form-control">
-                                        <option >Select subject</option>
+                                        <option value=''>Select subject</option>
                                         @foreach ($subjects as $subject)
-                                        <option value="{{$subject->id}}">{{$subject->subject_name}}</option>
+                                        <option value="{{$subject->id}}">{{$subject->subject_name}} ({{$subject->department->class}})</option>
                                         @endforeach
                                     </select>
                                 </div>
@@ -73,7 +90,7 @@
                                 <div class="form-group">
                                     <label>Teacher Name</label>
                                     <select name="teacher_id" class="form-control">
-                                        <option >Select teacher</option>
+                                        <option value=''>Select teacher</option>
                                         @foreach ($teachers as $teacher)
                                         <option value="{{$teacher->id}}">{{$teacher->name}}</option>
                                         @endforeach

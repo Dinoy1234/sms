@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Brian2694\Toastr\Facades\Toastr;
 use Illuminate\Support\Facades\Auth;
 
 class AdminController extends Controller
@@ -18,13 +19,20 @@ class AdminController extends Controller
     $userInfo=$req->except('_token');
 
     if(Auth::attempt($userInfo)){
-        return redirect()->route('master.index')->with('message','Login successful.');
+        if(Auth::user()->role == 'student' && Auth::user()->status == 'Approved' || Auth::user()->role == 'teacher'||Auth::user()->role == 'admin'){
+            Toastr::info('Login successful.', 'Login', );
+            return redirect()->route('master.index');
+        }
+        Auth::logout();
+        Toastr::warning('Not approved Yet', 'Pending', );
+        return redirect()->back();
     }
-    return redirect()->back()->with('error','Invalid user credentials');
-}
+    Toastr::warning('Invalid user credentials.', 'Error', );
+    return redirect()->back();
+} 
 public function logout()
 {
-  Auth::logout();
+ 
   return redirect()->route('admin.login')->with('message','logout successfully');
 }
 

@@ -3,23 +3,27 @@
 namespace App\Http\Controllers;
 
 use Carbon\Carbon;
+use App\Models\User;
 use App\Models\Subject;
 use App\Models\Attendance;
 use App\Models\Department;
 use App\Models\StudentClass;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Brian2694\Toastr\Facades\Toastr;
 
 class attendanceController extends Controller
 {
     public function attendance(Request $request)
     {
+        // dd(auth()->user()->id);
         $class=Department::all();
         $section=StudentClass::all();
         $subject=Subject::all();
         $all = StudentClass::where('section', $request->section)
                     ->where('subject_id', $request->subject_id)
                     ->where('class_id', $request->class_id)
+                    ->where('teacher_id',auth()->user()->id)
                     ->get();
         return view('backend.attendance.attendance',compact('class','section','subject','all'));
     }
@@ -37,6 +41,7 @@ class attendanceController extends Controller
             ]);
             DB::table('attendances')->insert($saveRecord);
         }
+        Toastr::success('submit successfully', 'attendance', );
         return redirect()->back();
     }
 

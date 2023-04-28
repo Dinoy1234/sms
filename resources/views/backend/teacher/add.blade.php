@@ -1,6 +1,24 @@
 @extends('backend.master')
 
 @section('master_content')
+@if (session()->has('success'))
+<p class="alert alert-success">
+    {{ session()->get('success') }}
+</p>
+@endif
+
+@if ($errors->any())
+<div class="alert alert-danger">
+    <ul>
+        @foreach ($errors->all() as $error)
+            <li>
+                {{ $error }}
+            </li>
+        @endforeach
+    </ul>
+</div>
+@endif
+
 
 <div class="content container-fluid">
 
@@ -97,7 +115,7 @@
                             <div class="col-12 col-sm-6">
                                 <div class="form-group">
                                     <label>Password</label>
-                                    <input type="text" name="password" class="form-control">
+                                    <input type="password" name="password" class="form-control">
                                 </div>
                             </div>
                             

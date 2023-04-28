@@ -56,12 +56,13 @@
                                     <select name="subject_id" class="form-control">
                                         <option >Select subject</option>
                                         @foreach ( $subject as $data)
-                                        <option value="{{$data->id}}">{{$data->subject_name}}</option>
+                                        <option value="{{$data->id}}">{{$data->subject_name}} ({{$data->department->class}})</option>
                                         @endforeach
 
                                     </select>
                                 </div>
                             </div>
+                           
 
                             <div class="col-12">
                                 <button type="submit" class="btn btn-primary">Submit</button>
@@ -99,6 +100,7 @@
                                 </tr>
                             </thead>
                             <tbody>
+                              {{-- @dd($all) --}}
                                 <div class="form-control" name="attendance_all[]">
                                 @foreach ($all as $key=>$data)
                                 <tr>
@@ -126,15 +128,25 @@
                                     </td>
                                 </tr>
                                 @endforeach
-
+                                
                                 </div>
                             </tbody>
+                           
                         </table>
+                        @if ($all->isEmpty())  
+                             <div class="col-md-12 ">
+                                    <p class="text-center">Data Not found!</p>
+                             </div>
+                            @endif
                     </div>
                 </div>
-                <div class="d-flex justify-content-end">
+                @if ($all->isEmpty())
+                @else
+                <div class="d-flex justify-content-center">
                     <button class="btn btn-success text-left">Submit</button>
-                </div>
+                </div> 
+                @endif
+                
 
             </form>
             </div>
